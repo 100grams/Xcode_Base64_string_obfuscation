@@ -1,7 +1,9 @@
+#!/usr/bin/ruby
+#
 # This script obfuscates c-style #define values in your 'defines_file'
 # Run this script _before_ comiling your code/project
 # Make sure to also run deobfuscate.rb after the build, to revert the obfuscation in 'defines_file'
-
+#
 # This script is in public domain at https://github.com/100grams/Xcode_Base64_string_obfuscation.git
  
 require 'Base64'

@@ -26,9 +26,11 @@ How to use
 
 1. Add "Run Script" build phase for **obfuscate.rb**  
   Open your Xcode project's "Build Phases" and add build phase for "Run Script". Copy and paste the contents of **obfuscate.rb** into the script body, and set the shell command to ```/usr/bin/ruby```. This script must be run **before "Compile Sources"**.
+  Make sure to set the value of ```defines_file``` in the script to relative path of the file you wish to obfuscate.
 
 2. Add "Run Script" build phase for **deobfuscate.rb**   
 Create another "Run Script" build phase with the contents of **deobfuscate.rb**. This run script must run **after "Compile Sources"**. You can put it as the last phase of the build.  
+  Make sure to set the value of ```defines_file``` in the script to the same value as in **obfuscate.rb**.
 
 3. Import Base64 category .h and .m files to your project. 
 
