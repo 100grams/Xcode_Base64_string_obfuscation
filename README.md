@@ -1,7 +1,10 @@
 Purpose
 --------------
 
+Obfuscate string literals in your Xcode project using two simple ruby scripts. 
+
 **obfuscate.rb** 
+
 This script obfuscates ```#define``` values in a file of your choice and replaces them with Base64 strings. 
 
 Example:
@@ -14,7 +17,9 @@ will become
 
 In addition, the script appends the ```deobfuscate()``` macro to the end of the file. This macro deobfuscates the hashed strings at runtime. The macro makes use of NSString(Base64) category so you must include that class in your project. 
 
+
 **deobfuscate.rb**
+
 This script reverses the obfuscation performed by *obfuscate.rb*. 
 
 
