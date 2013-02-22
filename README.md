@@ -1,7 +1,37 @@
 Purpose
 --------------
 
+**obfuscate.rb** 
+This script obfuscates ```#define``` values in a file of your choice and replaces them with Base64 strings. 
+
+Example:
+
+<code> #define kSomeConstant @"some_clear_text"  </code>
+
+will become 
+
+<code> #define kSomeConstant deobfuscate(c29tZV9jbGVhcl90ZXh0) </code>
+
+In addition, the script appends the ```deobfuscate()``` macro to the end of the file. This macro deobfuscates the hashed strings at runtime. The macro makes use of NSString(Base64) category so you must include that class in your project. 
+
+**deobfuscate.rb**
+This script reverses the obfuscation performed by *obfuscate.rb*. 
+
+
 Base64 is a set of categories that provide methods to encode and decode data as a base-64-encoded string.
+
+
+How to use
+--------------
+
+1. Add "Run Script" build phase for **obfuscate.rb**  
+  Open your Xcode project's "Build Phases" and add build phase for "Run Script". Copy and paste the contents of **obfuscate.rb** into the script body, and set the shell command to ```/usr/bin/ruby```. This script must be run **before "Compile Sources"**.
+
+2. Add "Run Script" build phase for **deobfuscate.rb**   
+Create another "Run Script" build phase with the contents of **deobfuscate.rb**. This run script must run **after "Compile Sources"**. You can put it as the last phase of the build.  
+
+3. Import Base64 category .h and .m files to your project. 
+
 
 
 Supported OS & SDK Versions
@@ -27,11 +57,6 @@ Thread Safety
 
 All the Base64 methods should be safe to call from multiple threads concurrently.
 
-
-Installation
---------------
-
-To use the Base64 category in an app, just drag the category files (demo files and assets are not needed) into your project and import the header file into any class where you wish to make use of the Base64 functionality.
 
 
 NSData Extensions
