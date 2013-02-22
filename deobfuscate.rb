@@ -1,3 +1,8 @@
+# This script reverses (deobfuscates) any c-style #define values which have been previously obfuscated by obfuscate.rb in your 'defines_file'
+# Run this script _after_ comiling your code/project
+
+# This script is in public domain at https://github.com/100grams/Xcode_Base64_string_obfuscation.git
+
 require 'Base64'
 
 defines_file = 'defines.h'
