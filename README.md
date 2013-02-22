@@ -37,7 +37,7 @@ How to use
 Create another "Run Script" build phase with the contents of **deobfuscate.rb**. This run script must run **after "Compile Sources"**. You can put it as the last phase of the build.  
   Make sure to set the value of ```defines_file``` in the script to the same value as in **obfuscate.rb**.
 
-3. Add #import "Base64.h" to your <defines_file> and import Base64.h and .m files into your project. 
+3. Add #import "Base64.h" to your ```defines_file``` and import Base64.h and .m files into your project. 
 
 
 
