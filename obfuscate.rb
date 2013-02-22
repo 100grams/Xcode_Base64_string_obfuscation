@@ -12,10 +12,9 @@ lines.each do |line|
     clear_text = line.scan(/#define\s+\w+\s+(.*)/).flatten
     if clear_text.first !=nil && clear_text.first.length > 0
       break if clear_text.first =~ /deobfuscate/
-      enc_text = Base64.encode64(clear_text.first) #cipher.update(clear_text.first) + cipher.final
+      enc_text = Base64.encode64(clear_text.first)
       enc_text.delete! "\n"
       line.gsub!(/(#define\s+\w+\s+)(.+)/, "\\1deobfuscate(#{enc_text})")
-      puts "line #{line}"
       count +=1
     end
   end

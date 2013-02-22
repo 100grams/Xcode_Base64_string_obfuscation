@@ -14,7 +14,6 @@ lines.each do |line|
       enc_text += "\n"
       clear_text = Base64.decode64(enc_text) 
       line.gsub!(/(#define\s+\w+\s+)(.+)/, "\\1#{clear_text}")
-      puts "line #{line}"
       count +=1
     end
   end
