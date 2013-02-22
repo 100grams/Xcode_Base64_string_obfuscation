@@ -12,7 +12,7 @@ defines_file = 'defines.h'
 
 def add_deobfuscate_macro(lines)
   index = lines.rindex(/(\s+)#endif/)
-  lines.insert(index, "\n#define deobfuscate(exp) \[NSString stringWithBase64EncodedString:\[NSString stringWithFormat:\@\"%@\\n\", exp]]\n")
+  lines.insert(index, "\n#define deobfuscate(exp) \[NSString stringWithBase64EncodedString:\[NSString stringWithFormat:\@\"%\@\\n\", exp\]\]\n")
 end
 
 
@@ -24,13 +24,13 @@ target = ""
 count = 0
 lines.each do |line| 
   if line =~/#define\s/ 
-    clear_text = line.scan(/#define\s+\w+\s+(.*)/).flatten
+    clear_text = line.scan(/#define\s+\w+\s+@"(.*)"/).flatten
     define_name = line.scan(/#define\s+(\w+)/).flatten
     if define_name.first !=~ /deobfuscate/ && clear_text.first !=nil && clear_text.first.length > 0
       break if clear_text.first =~ /deobfuscate/
       enc_text = Base64.encode64(clear_text.first)
       enc_text.delete! "\n"
-      line.gsub!(/(#define\s+\w+\s+)(.+)/, "\\1deobfuscate(#{enc_text})")
+      line.gsub!(/(#define\s+\w+\s+)(@".+")/, "\\1deobfuscate(\@\"#{enc_text}\")")
       count +=1      
     end
     has_deobfuscate_macro |= define_name.first =~ /deobfuscate/

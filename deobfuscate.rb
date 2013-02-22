@@ -23,11 +23,11 @@ has_deobfuscate_macro = false
 lines.each do |line| 
   if line =~/#define\s/ 
     define_name = line.scan(/#define\s+(\w+)/).flatten
-    enc_text = line.scan(/#define\s+\w+\s+deobfuscate\((.*)\)/).flatten.first
+    enc_text = line.scan(/#define\s+\w+\s+deobfuscate\(@"(.*)"\)/).flatten.first
     if enc_text != nil && enc_text.length > 0
       enc_text += "\n"
       clear_text = Base64.decode64(enc_text) 
-      line.gsub!(/(#define\s+\w+\s+)(.+)/, "\\1#{clear_text}")
+      line.gsub!(/(#define\s+\w+\s+)(.+)/, "\\1\@\"#{clear_text}\"")
       count +=1
     end
     has_deobfuscate_macro |= define_name.first =~ /deobfuscate/
